@@ -29,8 +29,8 @@ ENV/
 pdfs/
 pdfs_twofiles/
 results/
-debug.log
-output.log
+#debug.log
+#output.log
 
 # IDEs
 #.vscode/

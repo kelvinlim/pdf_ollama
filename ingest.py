@@ -1,5 +1,8 @@
 import fitz  # pymupdf
+import logging
 from typing import List
+
+logger = logging.getLogger(__name__)
 
 def clean_text_heuristics(pages_text: List[str]) -> str:
     """
@@ -38,6 +41,9 @@ def clean_text_heuristics(pages_text: List[str]) -> str:
         if line and last_lines.count(line) > (num_pages // 2):
             footer_lines_to_remove.add(line)
 
+    if header_lines_to_remove or footer_lines_to_remove:
+        logger.debug(f"Removing {len(header_lines_to_remove)} header patterns and {len(footer_lines_to_remove)} footer patterns.")
+
     cleaned_pages = []
     for lines in pages_lines:
         if not lines:
@@ -54,9 +60,14 @@ def extract_text_from_pdf(pdf_path: str) -> str:
     """
     Read PDF and return cleaned text.
     """
+    logger.debug(f"Opening PDF: {pdf_path}")
     doc = fitz.open(pdf_path)
     pages_text = []
-    for page in doc:
+    num_pages = len(doc)
+    for i, page in enumerate(doc):
+        if (i + 1) % 10 == 0 or i == 0 or i == num_pages - 1:
+            logger.debug(f"Extracting page {i+1}/{num_pages}")
         pages_text.append(page.get_text())
     
+    doc.close()
     return clean_text_heuristics(pages_text)
