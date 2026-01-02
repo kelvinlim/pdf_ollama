@@ -1,0 +1,109 @@
+# queries.yaml
+# Academic Paper Extraction Queries
+# This file defines the data points to be extracted from academic PDFs
+
+# === CORE METADATA ===
+- item_name: "title"
+  question: "What is the complete title of this academic paper?"
+  hint: "The title is usually at the top of the first page in large, bold text. It may span multiple lines."
+  output_type: "string"
+  is_required: true
+  examples:
+    - input: "Digital Phenotype for Childhood Internalizing Disorders: Less Positive Play and Promise for a Brief Assessment Battery"
+      output: "Digital Phenotype for Childhood Internalizing Disorders: Less Positive Play and Promise for a Brief Assessment Battery"
+
+- item_name: "authors"
+  question: "List all authors of this paper in the order they appear, including their full names."
+  hint: "Authors are typically listed below the title, often with affiliations. Include all authors even if there are many."
+  output_type: "list[string]"
+  is_required: true
+  examples:
+    - input: "John Smith, Jane Doe, Robert Johnson"
+      output: ["John Smith", "Jane Doe", "Robert Johnson"]
+
+- item_name: "first_author"
+  question: "Who is the first author of this paper?"
+  hint: "The first author is typically the lead researcher and appears first in the author list."
+  output_type: "string"
+  is_required: true
+
+- item_name: "corresponding_author"
+  question: "Who is the corresponding author? Look for email addresses or 'Corresponding author' labels."
+  hint: "The corresponding author usually has an email address listed or is marked with an asterisk or 'Corresponding author' notation."
+  output_type: "string"
+  is_required: false
+
+- item_name: "first_author_department"
+  question: "What department or institution is the first author affiliated with?"
+  hint: "Look for institutional affiliations listed with the first author's name. This is usually found below the author names or in the author information section."
+  output_type: "string"
+  is_required: false
+  examples:
+    - input: "Department of Psychology, University of California"
+      output: "Department of Psychology, University of California"
+
+- item_name: "corresponding_author_department"
+  question: "What department or institution is the corresponding author affiliated with?"
+  hint: "Look for institutional affiliations listed with the corresponding author's name. This is usually found below the author names or in the author information section."
+  output_type: "string"
+  is_required: false
+  examples:
+    - input: "Department of Psychiatry, Harvard Medical School"
+      output: "Department of Psychiatry, Harvard Medical School"
+
+
+# === RESEARCH METHODOLOGY ===
+- item_name: "research_method"
+  question: "What research methodology was used in this study?"
+  hint: "Look for sections labeled 'Methods', 'Methodology', or 'Study Design'. Common methods include experimental, observational, survey, case study, etc."
+  output_type: "string"
+  is_required: false
+  examples:
+    - input: "This was a randomized controlled trial"
+      output: "Randomized controlled trial"
+
+- item_name: "sample_size"
+  question: "How many participants or subjects were included in this study?"
+  hint: "Look for numbers in the Methods section or Results section. It might be stated as 'N = 100' or '100 participants'."
+  output_type: "string"
+  is_required: false
+  examples:
+    - input: "A total of 150 participants were recruited"
+      output: "150 participants"
+
+- item_name: "study_population"
+  question: "Who were the study participants? Describe the population studied."
+  hint: "Look in the Methods section for participant descriptions, including age, gender, demographics, or specific groups studied."
+  output_type: "string"
+  is_required: false
+  examples:
+    - input: "Children aged 8-12 years with internalizing disorders"
+      output: "Children aged 8-12 years with internalizing disorders"
+
+- item_name: "statistical_methods"
+  question: "What statistical methods or analyses were used in this study?"
+  hint: "Look in the Methods or Results section for statistical tests mentioned, such as t-tests, ANOVA, regression, etc."
+  output_type: "list[string]"
+  is_required: false
+  examples:
+    - input: "We used t-tests and ANOVA for group comparisons"
+      output: ["t-tests", "ANOVA"]
+
+# === RESEARCH FINDINGS ===
+- item_name: "main_findings"
+  question: "What are the main findings or results of this study?"
+  hint: "Look in the Results section or Conclusion section for key findings. Focus on the most important results."
+  output_type: "string"
+  is_required: false
+  examples:
+    - input: "The study found significant differences in digital behavior between groups"
+      output: "Significant differences in digital behavior were found between groups"
+
+- item_name: "limitations"
+  question: "What are the main limitations of this study?"
+  hint: "Look in the Results section or Conclusion section for limitations."
+  output_type: "string"
+  is_required: false
+  examples:
+    - input: "The study found significant differences in digital behavior between groups"
+      output: "Significant differences in digital behavior were found between groups"

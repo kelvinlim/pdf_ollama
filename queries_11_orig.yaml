@@ -1,0 +1,35 @@
+- item_name: "title"
+  question: "What is the title of the paper?"
+  hint: "Usually found on the first page in large font."
+  output_type: "string"
+  is_required: true
+
+- item_name: "authors"
+  question: "Who are the authors of the paper?"
+  hint: "List all authors as they appear."
+  output_type: "list[string]"
+  is_required: true
+
+- item_name: "abstract"
+  question: "What is the abstract of the paper?"
+  hint: "Provide the full abstract text."
+  output_type: "string"
+  is_required: false
+
+- item_name: "study_design"
+  question: "What is the study design?"
+  hint: "e.g., Randomized Controlled Trial, Observational Study, etc."
+  output_type: "string"
+  is_required: false
+
+- item_name: "sample_size"
+  question: "What was the sample size (n)?"
+  hint: "The number of participants or subjects."
+  output_type: "integer"
+  is_required: false
+
+- item_name: "key_findings"
+  question: "What are the key findings?"
+  hint: "List the main results or conclusions."
+  output_type: "list[string]"
+  is_required: false

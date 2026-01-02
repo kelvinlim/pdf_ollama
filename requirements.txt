@@ -1,0 +1,5 @@
+openai
+instructor
+pydantic
+pymupdf
+pyyaml
